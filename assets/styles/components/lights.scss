@@ -1,0 +1,281 @@
+// wrap your code in a mixin
+@mixin lights($type: "") {
+  // get Basesize in correct relation to design width
+  $BS: getBaseSize($type);
+
+  // define the styles of your component as designed
+  .lights {
+    display: flex;
+    flex: 1;
+
+    &__light {
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+      padding: 0 $BS * 32;
+    }
+
+    &__status {
+      font-weight: 400;
+    }
+
+    &__header {
+      display: flex;
+      align-items: center;
+      margin-bottom: $BS * 16;
+    }
+
+    &__presetWrapper {
+      margin-bottom: $BS * 16;
+    }
+
+    &__controlsAll {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: $BS * 16;
+      margin-bottom: $BS * 16;
+
+      .button {
+        margin: 0 $BS * 16;
+      }
+    }
+
+    &__powerSwitch {
+      position: relative;
+      padding: 0;
+      width: 22%;
+      border-radius: 50%;
+      margin-bottom: 0;
+      margin-right: $BS * 16;
+
+      &:before {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 45%;
+        height: 45%;
+        transform: translate(-50%, -50%);
+        border-radius: 50%;
+        border: solid $BS * 8 $Yellow;
+      }
+
+      &:after {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -100%);
+        width: $BS * 8;
+        height: 30%;
+        background-color: $Yellow;
+        box-sizing: border-box;
+        opacity: inherit;
+        border-radius: $BS * 8;
+        transition: border-color 0.3s ease-out;
+      }
+
+      @media (hover: hover) {
+        &:hover {
+          &:after {
+            border-color: $YellowDark;
+          }
+        }
+      }
+    }
+
+    &__presets {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      grid-gap: $BS * 8;
+      border: solid $BS * 8 $Black;
+      background: $Black;
+    }
+
+    &__effectsList {
+      display: flex;
+      flex-direction: column;
+      box-sizing: border-box;
+      width: 100%;
+      appearance: none;
+      -webkit-appearance: none;
+      background: $Black;
+      border-radius: 0;
+      border: none;
+      outline: none;
+      color: $Yellow;
+      padding: $BS * 8 $BS * 10;
+      margin: 0;
+    }
+
+    &__effectsLabel {
+      cursor: pointer;
+    }
+
+    &__effectInput {
+      display: none;
+
+      & + span {
+        position: relative;
+        display: block;
+        @include bsFontSize($BS, 18);
+        padding-left: $BS * 24;
+
+        &:after {
+          content: "";
+          position: absolute;
+          top: 50%;
+          left: 0;
+          background: $Yellow;
+          width: $BS * 16;
+          height: $BS * 16;
+          border-radius: 50%;
+          transform: translateY(-50%);
+          box-sizing: border-box;
+        }
+      }
+
+      &:checked {
+        & + span {
+          &:after {
+            background: $Black;
+            border: solid $YellowDark $BS * 4;
+          }
+        }
+      }
+    }
+
+    &__preset {
+      box-sizing: border-box;
+      width: 100%;
+
+      &--cold100 {
+        canvas {
+          background: #ffffff;
+        }
+      }
+
+      &--cold75 {
+        canvas {
+          background: darken(#ffffff, 25);
+        }
+      }
+
+      &--cold50 {
+        canvas {
+          background: darken(#ffffff, 50);
+        }
+      }
+
+      &--cold25 {
+        canvas {
+          background: darken(#ffffff, 75);
+        }
+      }
+
+      &--warm100 {
+        canvas {
+          background: #fffaf5;
+        }
+      }
+
+      &--warm75 {
+        canvas {
+          background: darken(#fffaf5, 25);
+        }
+      }
+
+      &--warm50 {
+        canvas {
+          background: darken(#fffaf5, 50);
+        }
+      }
+
+      &--warm25 {
+        canvas {
+          background: darken(#fffaf5, 75);
+        }
+      }
+
+      &--cyan {
+        canvas {
+          background: rgb(0, 255, 255);
+        }
+      }
+
+      &--magenta {
+        canvas {
+          background: rgb(255, 0, 255);
+        }
+      }
+
+      &--green {
+        canvas {
+          background: rgb(0, 255, 0);
+        }
+      }
+
+      &--yellow {
+        canvas {
+          background: rgb(255, 255, 0);
+        }
+      }
+    }
+
+    &__presetAll {
+      height: 100%;
+      width: auto;
+      display: flex;
+      margin: 0 $BS * 12;
+
+      &--cold100 {
+        canvas {
+          background: #ffffff;
+        }
+      }
+
+      &--cold75 {
+        canvas {
+          background: darken(#ffffff, 25%);
+        }
+      }
+
+      &--cold50 {
+        canvas {
+          background: darken(#ffffff, 50%);
+        }
+      }
+
+      &--cold25 {
+        canvas {
+          background: darken(#ffffff, 75%);
+        }
+      }
+
+      canvas {
+        display: block;
+        width: $BS * 50;
+      }
+    }
+
+    &__squareSpreader {
+      width: 100%;
+    }
+  }
+}
+
+// Render basic styles as designed
+@include lights();
+
+// Render basic styles with breakpoints
+@each $Breakpoint in $Breakpoints {
+  @include breakpoint(#{$Breakpoint}) {
+    @include lights(#{$Breakpoint});
+  }
+}
+
+// Render custom styles with breakpoints
+@include breakPointS() {
+  $BS: getBaseSize("S");
+}
