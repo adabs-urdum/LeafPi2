@@ -23,7 +23,6 @@
       display: flex;
       align-items: center;
       margin-bottom: $BS * 16;
-      min-height: 72px;
     }
 
     &__presetWrapper {
@@ -36,7 +35,6 @@
       align-items: center;
       padding: $BS * 16;
       margin-bottom: $BS * 16;
-      min-height: 72px;
 
       .button {
         margin: 0 $BS * 16;
