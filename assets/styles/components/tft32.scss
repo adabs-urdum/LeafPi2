@@ -1,0 +1,54 @@
+// wrap your code in a mixin
+@mixin tft32($type: "") {
+  // get Basesize in correct relation to design width
+  $BS: getBaseSize($type);
+
+  #main[data-path="tft32"] {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .button {
+      margin-bottom: 0;
+    }
+  }
+
+  .tft32 {
+    &__presets {
+      display: flex;
+      margin-bottom: $BS * 32;
+    }
+
+    &__current {
+      display: flex;
+      justify-content: center;
+      margin-bottom: $BS * 32;
+    }
+
+    &__all {
+    }
+
+    .lights__preset {
+      margin-right: $BS * 16;
+
+      &:last-child {
+        margin-right: 0;
+      }
+    }
+  }
+}
+
+// Render basic styles as designed
+@include tft32();
+
+// Render basic styles with breakpoints
+@each $Breakpoint in $Breakpoints {
+  @include breakpoint(#{$Breakpoint}) {
+    @include tft32(#{$Breakpoint});
+  }
+}
+
+// Render custom styles with breakpoints
+@include breakPointS() {
+  $BS: getBaseSize("S");
+}

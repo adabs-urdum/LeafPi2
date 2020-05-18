@@ -20,5 +20,11 @@ Array.prototype.uniqueValues = function () {
 };
 
 document.addEventListener("DOMContentLoaded", function () {
-  ReactDOM.render(<App />, document.getElementById("main"));
+  const mainElement = document.getElementById("main");
+  const currentPath = window.location.pathname.substr(1);
+  mainElement.dataset["path"] = currentPath;
+
+  if (mainElement) {
+    ReactDOM.render(<App currentPath={currentPath} />, mainElement);
+  }
 });

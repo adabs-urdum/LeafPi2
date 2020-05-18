@@ -4,6 +4,7 @@ import axios from "axios";
 class Light extends Component {
   constructor(props) {
     super(props);
+    this.setPreset = props.setPreset;
     const presetList = [
       "cold100",
       "cold75",
@@ -18,6 +19,7 @@ class Light extends Component {
       "yellow",
       "green",
     ];
+    this.toggle = props.toggle;
     this.state = {
       name: props.name,
       id: props.id,
@@ -72,88 +74,11 @@ class Light extends Component {
   };
 
   onClickPowerSwitch = () => {
-    axios
-      .get(`/power/${this.state.ip}/${this.state.authKey}/${this.state.on}`)
-      .then((response) => {
-        this.getInfo();
-      });
-  };
-
-  onClickPreset = (preset) => {
-    let brightness, hue, sat;
-    switch (preset) {
-      case "cold25":
-        brightness = 25;
-        hue = 200;
-        sat = 10;
-        break;
-      case "cold50":
-        brightness = 50;
-        hue = 200;
-        sat = 10;
-        break;
-      case "cold75":
-        brightness = 75;
-        hue = 200;
-        sat = 10;
-        break;
-      case "cold100":
-        brightness = 100;
-        hue = 200;
-        sat = 10;
-        break;
-      case "warm25":
-        brightness = 25;
-        hue = 30;
-        sat = 10;
-        break;
-      case "warm50":
-        brightness = 50;
-        hue = 30;
-        sat = 10;
-        break;
-      case "warm75":
-        brightness = 75;
-        hue = 30;
-        sat = 10;
-        break;
-      case "warm100":
-        brightness = 100;
-        hue = 30;
-        sat = 10;
-        break;
-      case "magenta":
-        brightness = 100;
-        hue = 300;
-        sat = 100;
-        break;
-      case "cyan":
-        brightness = 100;
-        hue = 180;
-        sat = 100;
-        break;
-      case "yellow":
-        brightness = 100;
-        hue = 60;
-        sat = 100;
-        break;
-      case "green":
-        brightness = 100;
-        hue = 90;
-        sat = 100;
-        break;
-      default:
-        break;
-    }
-    axios.get(`/hue/${this.state.ip}/${this.state.authKey}/${hue}`);
-    axios.get(
-      `/brightness/${this.state.ip}/${this.state.authKey}/${brightness}`
-    );
-    axios.get(`/sat/${this.state.ip}/${this.state.authKey}/${sat}`);
-
-    this.setState({
-      on: true,
-      effect: null,
+    new Promise((resolve, reject) => {
+      this.toggle(this.state.ip, this.state.authKey, this.state.on);
+      setTimeout(() => resolve(), 250);
+    }).then(() => {
+      this.getInfo();
     });
   };
 
@@ -184,7 +109,9 @@ class Light extends Component {
         <button
           key={preset}
           className={`lights__preset lights__preset--${preset}`}
-          onClick={(e) => this.onClickPreset(preset)}
+          onClick={(e) =>
+            this.setPreset(preset, this.state.ip, this.state.authKey)
+          }
         >
           <canvas
             width="6"
@@ -196,7 +123,7 @@ class Light extends Component {
     });
 
     return (
-      <div className="lights__light">
+      <div className="lights__light" data-id={this.state.id}>
         <div className="lights__header">
           <button
             className="button lights__powerSwitch"

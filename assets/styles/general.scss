@@ -157,6 +157,10 @@
       }
     }
 
+    &:last-child {
+      margin-right: 0;
+    }
+
     &:after {
       content: none;
     }

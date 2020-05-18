@@ -13,7 +13,11 @@ app.use(express.static(path.join(__dirname + "/dist")));
 
 //both index.js and things.js should be in same directory
 app.get("/", function (req, res) {
-  res.sendFile(path.join(__dirname + "/index.html"));
+  res.sendFile(path.join(__dirname + "/templates/index.html"));
+});
+
+app.get("/tft32", function (req, res) {
+  res.sendFile(path.join(__dirname + "/templates/tft32.html"));
 });
 
 app.use("/info", info);
