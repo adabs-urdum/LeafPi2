@@ -2,20 +2,20 @@ const lights = [
   {
     id: "eingang",
     name: "Eingang",
-    ip: "192.168.0.18",
-    key: "lnICyrh0voADd2GQLaRxyXgCs5Ep6Jw0",
+    ip: "192.168.0.10",
+    key: "Ow8klqeZtGZtAEcmKO5OpCLaqPXt7ElM",
   },
   {
     id: "stube",
     name: "Stube",
-    ip: "192.168.0.10",
-    key: "f6ZKYihkBOLVqiu2DwTaiPk06PubHA4q",
+    ip: "192.168.0.11",
+    key: "jW5XshHSh8rABAHtKYDvEngaWyviEhjP",
   },
   {
     id: "kueche",
     name: "Küche",
-    ip: "192.168.0.16",
-    key: "kCS0osqMp8pZ57fB4KHJ8QOxAo7Xgyiy",
+    ip: "192.168.0.12",
+    key: "QoHqPWAe9m5WJtkjE4CQtWArhTEm04jZ",
   },
 ];
 
