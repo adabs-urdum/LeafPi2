@@ -1,8 +1,6 @@
 const express = require("express");
-const http = require("http");
 const app = express();
 const path = require("path");
-const socketIo = require("socket.io");
 
 const info = require("./routes/info");
 const power = require("./routes/power");
@@ -29,29 +27,4 @@ app.use("/hue", hue);
 app.use("/sat", sat);
 app.use("/effect", effect);
 
-const server = http.createServer(app);
-const io = socketIo(server);
-
-const port = process.env.PORT || 4001;
-
-let interval;
-
-io.on("connection", (socket) => {
-  console.log("New client connected");
-  if (interval) {
-    clearInterval(interval);
-  }
-  interval = setInterval(() => getApiAndEmit(socket), 1000);
-  socket.on("disconnect", () => {
-    console.log("Client disconnected");
-    clearInterval(interval);
-  });
-});
-
-const getApiAndEmit = (socket) => {
-  const response = new Date();
-  // Emitting a new message. Will be consumed by the client
-  socket.emit("FromAPI", response);
-};
-
-server.listen(8000);
+app.listen(8000);
