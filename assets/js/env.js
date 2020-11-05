@@ -3,24 +3,27 @@ const lights = [
     id: "eingang",
     name: "Eingang",
     ip: "192.168.0.10",
-    key: "Ow8klqeZtGZtAEcmKO5OpCLaqPXt7ElM",
+    key: "IYWBQyXiXftedRVMC4o6WjEK1yryOeyE",
   },
   {
     id: "stube",
     name: "Stube",
-    ip: "192.168.0.11",
-    key: "jW5XshHSh8rABAHtKYDvEngaWyviEhjP",
+    ip: "192.168.0.12",
+    key: "IYWBQyXiXftedRVMC4o6WjEK1yryOeyE",
   },
   {
     id: "kueche",
     name: "Küche",
-    ip: "192.168.0.12",
-    key: "QoHqPWAe9m5WJtkjE4CQtWArhTEm04jZ",
+    ip: "192.168.0.11",
+    key: "IYWBQyXiXftedRVMC4o6WjEK1yryOeyE",
   },
 ];
 
+// get key
+// curl --location --request POST 'http://192.168.0.11:16021/api/v1/new'
+
 // get info
-//curl --location --request PUT 'http://192.168.0.10:16021/api/v1/Ow8klqeZtGZtAEcmKO5OpCLaqPXt7ElM/state' \
+//curl --location --request PUT 'http://192.168.0.10:16021/api/v1/u7JijA4pQC2V3nUNYXXq7QEckd7sF9kr/state'
 
 // turn off/on
 // curl --location --request PUT 'http://192.168.0.10:16021/api/v1/Ow8klqeZtGZtAEcmKO5OpCLaqPXt7ElM/state' --header 'Content-Type: application/json' --data-raw '{"on": {"value": true}}'
