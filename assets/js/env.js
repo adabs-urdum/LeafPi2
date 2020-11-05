@@ -23,7 +23,7 @@ const lights = [
 // curl --location --request POST 'http://192.168.0.11:16021/api/v1/new'
 
 // get info
-//curl --location --request PUT 'http://192.168.0.10:16021/api/v1/u7JijA4pQC2V3nUNYXXq7QEckd7sF9kr/state'
+//curl --location --request PUT 'http://192.168.0.10:16021/api/v1/IYWBQyXiXftedRVMC4o6WjEK1yryOeyE/state'
 
 // turn off/on
 // curl --location --request PUT 'http://192.168.0.10:16021/api/v1/Ow8klqeZtGZtAEcmKO5OpCLaqPXt7ElM/state' --header 'Content-Type: application/json' --data-raw '{"on": {"value": true}}'
